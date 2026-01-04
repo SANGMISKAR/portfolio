@@ -1,0 +1,719 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-dark: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Background Blobs --- */
+/* --- Background Cloud/Mist Effect --- */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    /* High blur makes it look like gas/clouds */
+    filter: blur(100px); 
+    z-index: -1;
+    /* Lower opacity for a subtle background fog */
+    opacity: 0.15; 
+    animation: cloudFloat 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 600px;
+    height: 400px;
+    /* Gradient: White center fading to transparent blueish mist */
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(56, 189, 248, 0.2));
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 700px;
+    height: 500px;
+    /* Gradient: Soft grey/white cloud */
+    background: radial-gradient(circle, rgba(200, 220, 250, 0.6), rgba(255, 255, 255, 0.1));
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -10s; /* Offsets animation so they don't move together */
+}
+
+/* Slower, drifting animation like real clouds */
+@keyframes cloudFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, 20px) scale(1.1); }
+}
+/* --- Navigation --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dot { color: var(--accent-cyan); }
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-list a:hover { color: var(--accent-cyan); }
+
+.btn-nav {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 50px;
+}
+
+/* --- Mobile Menu Toggle --- */
+.menu-toggle { display: none; cursor: pointer; }
+.bar { display: block; width: 25px; height: 3px; background: white; margin: 5px auto; transition: 0.3s; }
+
+/* --- Hero Section --- */
+/* --- Hero Section Layout --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050a18; /* Dark Navy Background */
+    padding: 100px 5% 50px;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 50px;
+}
+
+/* --- Left Column: Typography --- */
+.hero-text-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.greeting {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: block;
+    margin-bottom: -10px;
+}
+
+.name-highlight-1 {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #22d3ee; /* Cyan Blue */
+    line-height: 1.1;
+    margin: 0;
+}
+
+.name-highlight-2 {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #6366f1; /* Periwinkle/Purple Blue */
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+}
+
+.role-title {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.hero-description strong {
+    color: #e2e8f0;
+}
+
+/* --- Buttons --- */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-gradient {
+    padding: 15px 35px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed); /* Blue to Purple */
+    color: white;
+    font-weight: 600;
+    border-radius: 50px; /* Pill Shape */
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+.btn-dark {
+    padding: 15px 35px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 500;
+    border-radius: 50px; /* Pill Shape */
+    text-decoration: none;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-dark:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+/* --- Right Column: Visuals --- */
+.hero-visual {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Purple Circle Background */
+/* --- The Northern Lights Aura Effect --- */
+.avatar-bg {
+    position: absolute;
+    width: 400px; /* Slightly larger than the image to glow outwards */
+    height: 400px;
+    border-radius: 60%;
+    z-index: 0;
+    
+    /* The Northern Lights Gradient Colors */
+    background: conic-gradient(
+        from 180deg, 
+        #9055e9, /* Deep Indigo */
+        #22d3ee, /* Cyan */
+        #10cfe8, /* Aurora Green */
+        #4374e8, /* Purple */
+        #f47dea  /* Loop back to Indigo */
+    );
+    
+    /* The "Aura" Softness */
+    filter: blur(80px); 
+    opacity: 0.9;
+    
+    /* The Flowing Animation */
+    animation: flowAura 8s linear infinite;
+}
+
+/* Make the Aura Spin/Flow */
+@keyframes flowAura {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.05); } /* Subtle breathing pulse */
+    100% { transform: rotate(360deg) scale(1); }
+}   
+
+/* The Avatar Image */
+.hero-avatar {
+    width: 400px;
+    height: 400px;
+    border-radius: 60%; /* Makes image circular */
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    border: 5px solid rgba(0,0,0,0.2); /* Slight border for depth */
+}
+
+/* --- Floating Badge "Certified Cloud Pro" --- */
+.floating-badge {
+    position: absolute;
+    bottom: 40px;
+    right: 40px; /* Adjust depending on image size */
+    background: #1e293b; /* Dark card bg */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 3;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: floatBadge 4s ease-in-out infinite;
+}
+
+.badge-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(16, 185, 129, 0.2); /* Green tint */
+    color: #10b981; /* Green icon */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.badge-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-label {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.badge-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+}
+
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 900px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Image on top on mobile */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .avatar-bg { width: 300px; height: 300px; }
+    .hero-avatar { width: 280px; height: 280px; }
+    
+    .name-highlight-1, .name-highlight-2 { font-size: 3.5rem; }
+    
+    .floating-badge { right: 0; bottom: 0; }
+}
+
+/* --- General Sections --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+/* --- About --- */
+.about-card p { margin-bottom: 15px; color: var(--text-secondary); font-size: 1.1rem;}
+.about-card strong { color: var(--accent-cyan); }
+
+/* --- Skills Grid --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.skill-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--glass-border);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.skill-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-5px); }
+.skill-card i { font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 15px; }
+.skill-card h3 { margin-bottom: 10px; font-size: 1.2rem; }
+.skill-card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* --- Timeline (Experience) --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: var(--glass-border);
+    top: 0;
+    bottom: 0;
+    left: 20px;
+}
+
+.timeline-item {
+    padding: 10px 10px 10px 50px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-purple);
+    border-radius: 50%;
+    position: absolute;
+    left: 13px;
+    top: 25px;
+    z-index: 10;
+    box-shadow: 0 0 10px var(--accent-purple);
+}
+
+.timeline-content {
+    position: relative;
+}
+
+.timeline-content .date {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--accent-blue);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.timeline-content h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.timeline-content h4 { color: var(--text-secondary); font-weight: 400; margin-bottom: 15px; }
+.timeline-content ul { list-style-position: inside; color: var(--text-secondary); }
+.timeline-content li { margin-bottom: 8px; font-size: 0.95rem; }
+
+/* --- Certs & Education --- */
+.dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.left-align { text-align: left; margin-bottom: 30px; }
+
+.cert-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-cyan);
+}
+
+.cert-item i { color: var(--accent-cyan); }
+
+.edu-card { margin-bottom: 20px; }
+.edu-school { color: var(--accent-blue); font-weight: 600; margin-bottom: 5px; }
+.edu-date { font-size: 0.9rem; color: var(--text-secondary); }
+
+/* --- Footer --- */
+/* --- Premium Footer Styles --- */
+footer {
+    background: linear-gradient(to top, #050810, #0f172a);
+    border-top: 1px solid var(--glass-border);
+    padding-top: 60px;
+    margin-top: 100px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* 3 Columns layout */
+    gap: 40px;
+}
+
+/* Col 1: Brand */
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, white, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-tagline {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+/* Col 2: Links */
+.footer-col h4 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-cyan);
+    padding-left: 5px; /* Slight movement effect */
+}
+
+/* Col 3: Social Buttons */
+.social-links-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    border: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: var(--accent-blue);
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+}
+
+.email-text {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 2px;
+}
+
+.email-text:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* Responsive Footer for Mobile */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Stack columns on phone */
+        text-align: center;
+    }
+
+    .footer-tagline {
+        margin: 0 auto;
+    }
+    
+    .social-links-row {
+        justify-content: center;
+    }
+}
+/* --- Projects Section Styles --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-blue);
+    background: rgba(30, 41, 59, 0.9);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.project-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.project-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Tech Stack Tags */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto; /* Pushes tags to bottom */
+}
+
+.tech-stack span {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* --- Animation Classes --- */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 1001;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--bg-dark);
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.5s;
+        border-left: 1px solid var(--glass-border);
+    }
+
+    .nav-list.active {
+        right: 0;
+    }
+
+    .hero-content h1 { font-size: 2.5rem; }
+    
+    .dual-grid { grid-template-columns: 1fr; }
+    
+    .timeline::after { left: 10px; }
+    .timeline-item { padding-left: 35px; }
+    .timeline-dot { left: 3px; }
+}
+
+CSS
+
+/* --- Add this to style.css --- */
+
+.card-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Keeps text white/grey instead of blue link color */
+    display: block; /* Makes the link wrap the whole card */
+    height: 100%;
+}
+
+.card-link:hover .project-card {
+    border-color: var(--accent-cyan);
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+}
